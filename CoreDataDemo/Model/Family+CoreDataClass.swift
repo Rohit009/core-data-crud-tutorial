@@ -1,5 +1,5 @@
 //
-//  Person+CoreDataClass.swift
+//  Family+CoreDataClass.swift
 //  CoreDataDemo
 //
 //  Created by Rohit Patil on 02/08/20.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Person)
-public class Person: NSManagedObject {
+@objc(Family)
+public class Family: NSManagedObject {
 
 }

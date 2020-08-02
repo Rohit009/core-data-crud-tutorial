@@ -2,7 +2,7 @@
 //  Person+CoreDataProperties.swift
 //  CoreDataDemo
 //
-//  Created by Rohit Patil on 17/07/20.
+//  Created by Rohit Patil on 02/08/20.
 //  Copyright © 2020 Patil corp. All rights reserved.
 //
 //
@@ -20,5 +20,6 @@ extension Person {
     @NSManaged public var age: Int64
     @NSManaged public var gender: String?
     @NSManaged public var name: String?
+    @NSManaged public var family: Family?
 
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
@@ -54,7 +55,17 @@ class ViewController: UIViewController {
     
     private func fetchPeople() {
         do {
-            self.items = try self.context.fetch(Person.fetchRequest())
+            let request = Person.fetchRequest() as NSFetchRequest<Person>
+
+            // Filtering
+            // let predicate = NSPredicate(format: "name CONTAINS 'Ted'")
+            // request.predicate = predicate
+            
+            // Sorting
+            let nameSortDescriptor =  NSSortDescriptor(key: "name", ascending: true)
+            request.sortDescriptors = [ nameSortDescriptor ]
+
+            self.items = try self.context.fetch(request)
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -64,6 +75,24 @@ class ViewController: UIViewController {
         }
     }
     
+    func relationshipDemo() {
+        // Create a family
+        let family = Family(context: self.context)
+        family.name = "Home town family"
+        
+        // Create a person
+        let person = Person(context: self.context)
+        person.name = "Maggie"
+        
+        // Add person to family
+        family.addToPeople(person)
+        
+        // Save the context
+        try! self.context.save()
+        
+        // When fetched Person object from core data. Its relative family object can be fetched from person.family.
+    }
+
     // MARK: Tap handlers
 
     @objc func didTapAddButton() {
